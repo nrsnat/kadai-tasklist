@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 /*
+Illuminate\Support\Facades\Facade\Route.phpを利用する、ということを宣言しています。
+Illuminate というのは、 vendor/laravel/framework/src/Illuminate/ に存在します。
+
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
