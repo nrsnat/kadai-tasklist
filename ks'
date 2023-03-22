@@ -1,0 +1,43 @@
+[1mdiff --git a/routes/web.php b/routes/web.php[m
+[1mindex e8895f9..6518c91 100644[m
+[1m--- a/routes/web.php[m
+[1m+++ b/routes/web.php[m
+[36m@@ -1,21 +1,25 @@[m
+ <?php[m
+ [m
+ use Illuminate\Support\Facades\Route;[m
+[31m-[m
+ /*[m
+ Illuminate\Support\Facades\Facade\Route.phpを利用する、ということを宣言しています。[m
+ Illuminate というのは、 vendor/laravel/framework/src/Illuminate/ に存在します。[m
+[32m+[m[32m*/[m
+[32m+[m[32muse App\Http\Controllers\TasksController;[m
+ [m
+[31m-|--------------------------------------------------------------------------[m
+[31m-| Web Routes[m
+[31m-|--------------------------------------------------------------------------[m
+[31m-|[m
+[31m-| Here is where you can register web routes for your application. These[m
+[31m-| routes are loaded by the RouteServiceProvider within a group which[m
+[31m-| contains the "web" middleware group. Now create something great![m
+[31m-|[m
+[32m+[m[32mRoute::get('/', [TasksController::class, 'index']);[m
+[32m+[m
+[32m+[m[32m/*[m
+[32m+[m[32mRoute::get('tasks/{id}', [TasksController::class, 'show']);[m
+[32m+[m[32mRoute::post('tasks', [TasksController::class, 'store']);[m
+[32m+[m[32mRoute::put('tasks/{id}', [TasksController::class, 'update']);[m
+[32m+[m[32mRoute::delete('tasks/{id}', [TasksController::class, 'destroy']);[m
+[32m+[m
+[32m+[m[32mRoute::get('tasks', [TasksController::class, 'index'])->name('task.index');[m
+[32m+[m[32mRoute::get('tasks/create', [TasksController::class, 'create'])->name('task.create'); //違うかも[m
+[32m+[m
+[32m+[m[32mRoute::get('tasks/{id}/edit', [TasksController::class, 'edit'])->name('task.edit');[m
+ */[m
+ [m
+[31m-Route::get('/', function () {[m
+[31m-    return view('welcome');[m
+[31m-});[m
+[32m+[m
+[32m+[m[32mRoute::resource('tasks', TasksController::class);[m
+\ No newline at end of file[m
