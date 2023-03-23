@@ -32,22 +32,24 @@ class TasksController extends Controller
     // postでtasks/にアクセスされた場合の「新規登録処理」
     public function store(Request $request)
     {
-        // メッセージを作成
+        $request->validate([
+            'status' => 'required|max:10',
+            'content' => 'required',
+        ]);
+
         $task = new Task;
+        $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
 
-        // トップページへリダイレクトさせる
         return redirect('/');
     }
 
     // getでtasks/（任意のid）にアクセスされた場合の「取得表示処理」
     public function show($id)
     {
-        // idの値でメッセージを検索して取得
         $task = Task::findOrFail($id);
 
-        // メッセージ詳細ビューでそれを表示
         return view('tasks.show', [
             'task' => $task,
         ]);    }
@@ -55,10 +57,8 @@ class TasksController extends Controller
     // getでtasks/（任意のid）/editにアクセスされた場合の「更新画面表示処理」
     public function edit($id)
     {
-        // idの値でメッセージを検索して取得
         $task = Task::findOrFail($id);
 
-        // メッセージ編集ビューでそれを表示
         return view('tasks.edit', [
             'task' => $task,
         ]);
@@ -67,13 +67,17 @@ class TasksController extends Controller
     // putまたはpatchでtasks/（任意のid）にアクセスされた場合の「更新処理」
     public function update(Request $request, $id)
     {
-        // idの値でタスクを検索して取得
+        $request->validate([
+            'status' => 'required|max:10',
+            'content' => 'required',
+        ]);
+        
         $task = Task::findOrFail($id);
-        // タスクを更新
+        
+        $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
 
-        // トップページへリダイレクトさせる
         return redirect('/');
     }
 
